@@ -1,10 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, User
 
 
-class CustomUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=15)
+class CustomUser(AbstractUser):
+    user = models.CharField(max_length=10, blank=True, null=True)
+    password = models.CharField(max_length=10, blank=True, null=True)
+
+    phone_number = models.CharField(max_length=15, unique=True)
+    name = models.CharField(max_length=40)
+    USERNAME_FIELD = 'phone_number'
+    REQUIRED_FIELDS = ('name',)
 
 
 class Factory(models.Model):
@@ -14,6 +19,7 @@ class Factory(models.Model):
 class FreightCompany(models.Model):
     name = models.CharField(max_length=30)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    associate_companies = models.ManyToManyField(Factory)
 
 
 class Driver(models.Model):
@@ -30,4 +36,4 @@ class Load(models.Model):
         ACCEPTING = 'accepting', 'Accepting'
         COMPLETED = 'completed', 'Assigning completed'
 
-    status = models.CharField(max_length=10, choices=Status, default=Status.ACCEPTING)
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.ACCEPTING)

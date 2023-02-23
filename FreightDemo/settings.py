@@ -101,14 +101,27 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# django rest framework
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ]
 }
 
+
+# custom authentication
+
+AUTH_USER_MODEL = 'freight.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+    'freight.authentication.PhoneNumberBackend'
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

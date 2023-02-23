@@ -5,6 +5,6 @@ class PhoneNumberBackend:
     def authenticate(self, request, username=None, password=None):
         try:
             user = CustomUser.objects.get(phone_number=username)
-            return user.user
+            return user
         except Exception as e:
             return None
