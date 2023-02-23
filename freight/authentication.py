@@ -8,3 +8,10 @@ class PhoneNumberBackend:
             return user
         except Exception as e:
             return None
+    
+    def get_user(self, user_id):
+        try:
+            user = CustomUser.objects.get(pk=user_id)
+            return user
+        except Exception as e:
+            return None

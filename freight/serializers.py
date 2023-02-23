@@ -5,4 +5,4 @@ from .models import Driver
 class DriverSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Driver
-        fields = ['full_name', 'user']
+        fields = ['user_id', 'full_name']
