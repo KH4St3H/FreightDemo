@@ -27,6 +27,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'drivers', views.DriverViewSet)
+router.register(r'factories', views.FactoryViewSet)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
