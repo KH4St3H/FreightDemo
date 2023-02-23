@@ -27,7 +27,7 @@ class Driver(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
 class Load(models.Model):
-    declare_date = models.DateField()
+    declare_date = models.DateField(auto_now_add=True)
     factory = models.ForeignKey(Factory, on_delete=models.CASCADE)
     weight = models.PositiveIntegerField()
 
